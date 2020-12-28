@@ -403,5 +403,53 @@ app.get('/delete', (req,res) => {
     });
 });
 
+app.get('/update' , (req,res) => {
+    res.status(200).render('update',{id:req.query.id});
+});
+
+app.post('/update',(req,res) => {
+    console.log(id);
+    const client = new MongoClient(mongourl); 
+    client.connect((err) => {
+    assert.equal(null,err);
+    const db = client.db(dbName);
+    let criteria = {};
+    criteria['_id'] = new ObjectID(id);
+    if(req.files.img != null) {
+	fs.readFile(req.files.img.path, (err,image) => {
+	assert.equal(null,err);
+	console.log(Buffer.from(image).toString('base64'));
+    let data = db.collection('rests').find(criteria);
+    data.toArray((err,docs) => {
+    console.log(docs);
+    if(docs[0].owner == req.session.username){
+    db.collection('rests').updateOne({_id:id},{
+    $set:{name:req.body.name,
+        borough:req.body.borough,
+        cuisine:req.body.cuisine,
+        address:{
+            street:req.body.street,
+            building:req.body.street,
+            zipcode:req.body.zipcode,
+                coord:{lon:req.body.lon,
+                    lat:req.body.lat}},
+        img:{data:Buffer.from(image).toString('base64')}}});
+    client.close();
+	res.status(200).render('success',{});
+}})
+})
+};
+})
+});
+
+
+
+app.get('/map', (req,res) => {
+    res.status(200).render('map',{lat:req.query.lat,lon:req.query.lon});
+});
+
+
+
+
 app.listen(process.env.PORT || 8099);
 

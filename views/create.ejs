@@ -4,13 +4,13 @@
 		<form action="/create" method="post" enctype="multipart/form-data">
 		Name: <input type="text" name="name" required><br>
 		Borough: <input type="text" name="borough" required><br>
-		Cuisine: <input type="text" name="cuisine"><br>
-		Street: <input type="text" name="street"><br>
-		Building: <input type="text" name="building"><br>
-		Zipcode: <input type="number" name="zipcode"><br>
-		GPS Coordinates(lon.) <input type="number" step="0.001" name="lon"><br>
-		GPS Coordinates(lat.) <input type="number" step="0.001" name="lat"><br>
-		Photo: <input type="file" name="img" accept="image/*"><br>
+		Cuisine: <input type="text" name="cuisine" required><br>
+		Street: <input type="text" name="street" required><br>
+		Building: <input type="text" name="building" required><br>
+		Zipcode: <input type="number" name="zipcode" required><br>
+		GPS Coordinates(lon.) <input type="number" step="0.001" name="lon" required><br>
+		GPS Coordinates(lat.) <input type="number" step="0.001" name="lat" required><br>
+		Photo: <input type="file" name="img" accept="image/*" required><br>
 		<input type="submit" value="create">
 		</form>
 	</body>

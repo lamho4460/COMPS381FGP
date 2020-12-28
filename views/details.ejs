@@ -76,9 +76,11 @@
                                              </td>
                                           </tr>
 </table>
-
+<%if(source[0].address.coord.lon!=""&&source[0].address.coord.lon!=""){%>
+<a href="/map?lat=<%=source[0].address.coord.lat%>&lon=<%=source[0].address.coord.lon%>"><button type="button">Map</button></a><%}%>
 <a href="/rate?id=<%=source[0]._id %>"><button type="button">Rate</button></a>
 <a href="/delete?id=<%=source[0]._id %>"><button type="button">Delete</button></a>
+<a href="/update?id=<%=source[0]._id%>"><button type="button">Update</button></a>
 <a href="/read"><button type="button">Go Back</button></a>
 				
 
